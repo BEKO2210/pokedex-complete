@@ -215,6 +215,16 @@
             transform: rotateY(-80deg);
         }
 
+        @keyframes cryPulse {
+            0% { box-shadow: 0 0 0 0 rgba(255,203,5,0.6); }
+            70% { box-shadow: 0 0 0 12px rgba(255,203,5,0); }
+            100% { box-shadow: 0 0 0 0 rgba(255,203,5,0); }
+        }
+
+        .pokemon-book.cry-playing {
+            animation: cryPulse 0.6s ease-out;
+        }
+
         .cover-image {
             width: 100px;
             height: 100px;
@@ -906,7 +916,7 @@
 
         <div class="drawer-actions">
             <button class="btn btn-secondary" id="resetBtn">Zurücksetzen</button>
-            <button class="btn btn-primary" id="applyBtn">Anwenden</button>
+            <button class="btn btn-primary" id="applyBtn">Schließen</button>
         </div>
     </div>
 
@@ -1399,16 +1409,17 @@
                 });
             });
 
-            // Generation filters
+            // Generation filters - sofort anwenden
             document.getElementById('genFilters').addEventListener('click', (e) => {
                 if (e.target.classList.contains('gen-filter')) {
                     document.querySelectorAll('.gen-filter').forEach(btn => btn.classList.remove('active'));
                     e.target.classList.add('active');
                     selectedGen = e.target.dataset.gen;
+                    applyFilters();
                 }
             });
 
-            // Type filters
+            // Type filters - sofort anwenden
             document.getElementById('typeFilters').addEventListener('click', (e) => {
                 if (e.target.classList.contains('type-filter')) {
                     const type = e.target.dataset.type;
@@ -1419,10 +1430,11 @@
                         selectedTypes.add(type);
                         e.target.classList.add('active');
                     }
+                    applyFilters();
                 }
             });
 
-            // Stat filter sliders
+            // Stat filter sliders - sofort anwenden
             document.querySelectorAll('.stat-slider').forEach(slider => {
                 slider.addEventListener('input', (e) => {
                     const stat = e.target.dataset.stat;
@@ -1433,23 +1445,26 @@
                     if (label) {
                         label.textContent = val > 0 ? `≥ ${val}` : `0 - ${max}`;
                     }
+                    applyFilters();
                 });
             });
 
-            // Sort options
+            // Sort options - sofort anwenden
             document.querySelector('.sort-options').addEventListener('click', (e) => {
                 if (e.target.classList.contains('sort-btn')) {
                     document.querySelectorAll('.sort-btn').forEach(btn => btn.classList.remove('active'));
                     e.target.classList.add('active');
                     selectedSort = e.target.dataset.sort;
+                    applyFilters();
                 }
             });
 
-            // Sort direction toggle
+            // Sort direction toggle - sofort anwenden
             document.getElementById('sortDirBtn').addEventListener('click', (e) => {
                 sortDirection = sortDirection === 'asc' ? 'desc' : 'asc';
                 e.target.dataset.dir = sortDirection;
                 e.target.textContent = sortDirection === 'asc' ? '↑ Aufsteigend' : '↓ Absteigend';
+                applyFilters();
             });
 
             document.getElementById('searchBox').addEventListener('input', (e) => {
@@ -1458,7 +1473,6 @@
             });
 
             document.getElementById('applyBtn').addEventListener('click', () => {
-                applyFilters();
                 closeDrawer();
             });
 
@@ -1497,6 +1511,12 @@
                     const pokemonId = book.dataset.id;
                     if (pokemonId) {
                         playPokemonCry(pokemonId);
+                        book.classList.remove('cry-playing');
+                        void book.offsetWidth; // Reflow erzwingen für erneute Animation
+                        book.classList.add('cry-playing');
+                        book.addEventListener('animationend', () => {
+                            book.classList.remove('cry-playing');
+                        }, { once: true });
                     }
                 }
             });
@@ -1504,7 +1524,18 @@
 
         // Pokémon Cry abspielen
         function playPokemonCry(id) {
-            const cry = new Audio(`https://play.pokemonshowdown.com/audio/cries/${id}.mp3`);
+            const pokemon = allPokemon.find(p => p.id === parseInt(id));
+            if (pokemon && pokemon.cries) {
+                const cryUrl = pokemon.cries.latest || pokemon.cries.legacy;
+                if (cryUrl) {
+                    const cry = new Audio(cryUrl);
+                    cry.volume = 0.3;
+                    cry.play().catch(e => console.log('Cry blocked:', e));
+                    return;
+                }
+            }
+            // Fallback: PokéAPI cries repository
+            const cry = new Audio(`https://raw.githubusercontent.com/PokeAPI/cries/main/cries/pokemon/latest/${id}.ogg`);
             cry.volume = 0.3;
             cry.play().catch(e => console.log('Cry blocked:', e));
         }
