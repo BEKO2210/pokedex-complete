@@ -541,152 +541,179 @@
             color: #000;
         }
 
-        .music-player {
-            position: fixed;
-            bottom: 20px;
-            left: 20px;
-            background: linear-gradient(135deg, #ffcb05 0%, #ff6b35 100%);
-            border-radius: 50px;
-            padding: 12px 20px;
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            box-shadow: 0 4px 20px rgba(255, 107, 53, 0.4), 0 0 30px rgba(255, 203, 5, 0.3);
-            z-index: 1000;
-            border: 3px solid #3c5aa6;
-            transition: all 0.3s ease;
+        /* Stat Filter Styles */
+        .stat-filter-section {
+            margin-bottom: 15px;
         }
 
-        .music-player:hover {
-            transform: scale(1.05);
-            box-shadow: 0 6px 30px rgba(255, 107, 53, 0.6), 0 0 40px rgba(255, 203, 5, 0.5);
-        }
-
-        .music-player.minimized {
-            padding: 12px;
-            border-radius: 50%;
-        }
-
-        .music-player.minimized .player-info,
-        .music-player.minimized .player-controls {
-            display: none;
-        }
-
-        .pokeball-btn {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background: linear-gradient(180deg, #ff0000 0%, #ff0000 50%, #fff 50%, #fff 100%);
-            border: 3px solid #000;
-            cursor: pointer;
-            position: relative;
-            transition: transform 0.3s ease;
-            flex-shrink: 0;
-        }
-
-        .pokeball-btn:hover {
-            transform: rotate(360deg);
-        }
-
-        .pokeball-btn::before {
-            content: '';
-            position: absolute;
-            width: 12px;
-            height: 12px;
-            background: #fff;
-            border: 2px solid #000;
-            border-radius: 50%;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            z-index: 1;
-        }
-
-        .pokeball-btn.playing {
-            animation: pokeballShake 0.5s ease infinite;
-        }
-
-        @keyframes pokeballShake {
-            0%, 100% { transform: rotate(-5deg); }
-            50% { transform: rotate(5deg); }
-        }
-
-        .player-info {
-            display: flex;
-            flex-direction: column;
-            gap: 2px;
-        }
-
-        .player-title {
-            font-family: 'Fredoka One', cursive;
-            font-size: 12px;
-            color: #3c5aa6;
-            text-shadow: 1px 1px 0 rgba(255,255,255,0.5);
-        }
-
-        .player-status {
-            font-size: 10px;
-            color: rgba(0,0,0,0.6);
-        }
-
-        .player-controls {
-            display: flex;
-            align-items: center;
+        .stat-filter-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
             gap: 10px;
         }
 
-        .control-btn {
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-            background: rgba(255,255,255,0.9);
-            border: 2px solid #3c5aa6;
-            cursor: pointer;
+        .stat-filter-item {
             display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .stat-filter-header {
+            display: flex;
+            justify-content: space-between;
             align-items: center;
-            justify-content: center;
-            font-size: 14px;
-            transition: all 0.2s ease;
         }
 
-        .control-btn:hover {
-            background: #fff;
-            transform: scale(1.1);
+        .stat-filter-name {
+            font-size: 11px;
+            font-weight: 600;
+            color: rgba(255,255,255,0.8);
         }
 
-        .volume-slider {
-            width: 60px;
+        .stat-filter-value {
+            font-size: 10px;
+            color: #ffcb05;
+            font-weight: 700;
+            min-width: 50px;
+            text-align: right;
+        }
+
+        .stat-slider {
+            width: 100%;
             height: 4px;
             -webkit-appearance: none;
-            background: rgba(0,0,0,0.2);
+            background: rgba(255,255,255,0.1);
             border-radius: 2px;
             outline: none;
         }
 
-        .volume-slider::-webkit-slider-thumb {
+        .stat-slider::-webkit-slider-thumb {
             -webkit-appearance: none;
-            width: 12px;
-            height: 12px;
-            background: #3c5aa6;
+            width: 14px;
+            height: 14px;
+            background: #ffcb05;
             border-radius: 50%;
             cursor: pointer;
+            border: 2px solid #fff;
         }
 
-        .minimize-btn {
-            position: absolute;
-            top: -10px;
-            right: -10px;
-            width: 20px;
-            height: 20px;
+        .stat-slider::-moz-range-thumb {
+            width: 14px;
+            height: 14px;
+            background: #ffcb05;
             border-radius: 50%;
-            background: #3c5aa6;
+            cursor: pointer;
             border: 2px solid #fff;
+        }
+
+        .stat-slider.stat-hp::-webkit-slider-thumb { background: #ff5959; }
+        .stat-slider.stat-atk::-webkit-slider-thumb { background: #f5ac78; }
+        .stat-slider.stat-def::-webkit-slider-thumb { background: #fae078; }
+        .stat-slider.stat-spa::-webkit-slider-thumb { background: #9db7f5; }
+        .stat-slider.stat-spd::-webkit-slider-thumb { background: #a7db8d; }
+        .stat-slider.stat-spe::-webkit-slider-thumb { background: #fa92b2; }
+        .stat-slider.stat-bst::-webkit-slider-thumb { background: #ffcb05; }
+
+        .stat-slider.stat-hp::-moz-range-thumb { background: #ff5959; }
+        .stat-slider.stat-atk::-moz-range-thumb { background: #f5ac78; }
+        .stat-slider.stat-def::-moz-range-thumb { background: #fae078; }
+        .stat-slider.stat-spa::-moz-range-thumb { background: #9db7f5; }
+        .stat-slider.stat-spd::-moz-range-thumb { background: #a7db8d; }
+        .stat-slider.stat-spe::-moz-range-thumb { background: #fa92b2; }
+        .stat-slider.stat-bst::-moz-range-thumb { background: #ffcb05; }
+
+        /* Sort Options */
+        .sort-section {
+            margin-bottom: 15px;
+        }
+
+        .sort-options {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+
+        .sort-btn {
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 10px;
+            background: rgba(255,255,255,0.1);
+            border: 2px solid transparent;
+            cursor: pointer;
+            color: #fff;
+            transition: all 0.2s;
+        }
+
+        .sort-btn:hover,
+        .sort-btn.active {
+            background: #ffcb05;
+            color: #000;
+        }
+
+        .sort-direction {
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 10px;
+            background: rgba(255,255,255,0.15);
+            border: 2px solid rgba(255,255,255,0.2);
+            cursor: pointer;
+            color: #fff;
+            transition: all 0.2s;
+        }
+
+        .sort-direction:hover {
+            background: rgba(255,255,255,0.25);
+        }
+
+        /* Filter active count badge */
+        .filter-count {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: #ff0000;
             color: #fff;
             font-size: 10px;
-            cursor: pointer;
+            font-weight: 700;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
+        }
+
+        .fab {
+            position: relative;
+        }
+
+        .filter-section-title {
+            font-size: 13px;
+            color: #ffcb05;
+            font-family: 'Fredoka One', cursive;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .filter-section-title .toggle-icon {
+            font-size: 10px;
+            transition: transform 0.2s;
+        }
+
+        .filter-section-title .toggle-icon.collapsed {
+            transform: rotate(-90deg);
+        }
+
+        .filter-section-content {
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+        .filter-section-content.collapsed {
+            max-height: 0 !important;
         }
     </style>
 </head>
@@ -704,6 +731,7 @@
     <div class="stats-bar">
         <span>Geladen: <strong id="loadedCount">0</strong> / <strong id="totalCount">0</strong></span>
         <span>Generation: <strong id="genFilter">Alle</strong></span>
+        <span>Angezeigt: <strong id="shownCount">0</strong></span>
     </div>
 
     <main>
@@ -730,7 +758,10 @@
         <input type="text" class="search-box" id="searchBox" placeholder="Pokémon suchen...">
         
         <div class="filter-section">
-            <label class="filter-label">Generation:</label>
+            <div class="filter-section-title" data-toggle="genSection">
+                <span class="toggle-icon">▼</span> Generation
+            </div>
+            <div class="filter-section-content" id="genSection">
             <div class="gen-filters" id="genFilters">
                 <button class="gen-filter active" data-gen="all">Alle</button>
                 <button class="gen-filter" data-gen="1">Gen 1</button>
@@ -743,29 +774,100 @@
                 <button class="gen-filter" data-gen="8">Gen 8</button>
                 <button class="gen-filter" data-gen="9">Gen 9</button>
             </div>
+            </div>
         </div>
         
         <div class="filter-section">
-            <label class="filter-label">Nach Typ filtern:</label>
-            <div class="type-filters" id="typeFilters"></div>
+            <div class="filter-section-title" data-toggle="typeSection">
+                <span class="toggle-icon">▼</span> Nach Typ filtern
+            </div>
+            <div class="filter-section-content" id="typeSection">
+                <div class="type-filters" id="typeFilters"></div>
+            </div>
         </div>
-        
+
+        <div class="filter-section stat-filter-section">
+            <div class="filter-section-title" data-toggle="statSection">
+                <span class="toggle-icon">▼</span> Nach Statuswerten filtern
+            </div>
+            <div class="filter-section-content" id="statSection">
+                <div class="stat-filter-grid">
+                    <div class="stat-filter-item">
+                        <div class="stat-filter-header">
+                            <span class="stat-filter-name">KP (HP)</span>
+                            <span class="stat-filter-value" id="hpMinLabel">0 - 255</span>
+                        </div>
+                        <input type="range" class="stat-slider stat-hp" id="hpMin" min="0" max="255" value="0" data-stat="hp">
+                    </div>
+                    <div class="stat-filter-item">
+                        <div class="stat-filter-header">
+                            <span class="stat-filter-name">Angriff (ANG)</span>
+                            <span class="stat-filter-value" id="atkMinLabel">0 - 255</span>
+                        </div>
+                        <input type="range" class="stat-slider stat-atk" id="atkMin" min="0" max="255" value="0" data-stat="atk">
+                    </div>
+                    <div class="stat-filter-item">
+                        <div class="stat-filter-header">
+                            <span class="stat-filter-name">Verteidigung (VER)</span>
+                            <span class="stat-filter-value" id="defMinLabel">0 - 255</span>
+                        </div>
+                        <input type="range" class="stat-slider stat-def" id="defMin" min="0" max="255" value="0" data-stat="def">
+                    </div>
+                    <div class="stat-filter-item">
+                        <div class="stat-filter-header">
+                            <span class="stat-filter-name">Sp. Angriff (SPA)</span>
+                            <span class="stat-filter-value" id="spaMinLabel">0 - 255</span>
+                        </div>
+                        <input type="range" class="stat-slider stat-spa" id="spaMin" min="0" max="255" value="0" data-stat="spa">
+                    </div>
+                    <div class="stat-filter-item">
+                        <div class="stat-filter-header">
+                            <span class="stat-filter-name">Sp. Verteidigung (SPV)</span>
+                            <span class="stat-filter-value" id="spdMinLabel">0 - 255</span>
+                        </div>
+                        <input type="range" class="stat-slider stat-spd" id="spdMin" min="0" max="255" value="0" data-stat="spd">
+                    </div>
+                    <div class="stat-filter-item">
+                        <div class="stat-filter-header">
+                            <span class="stat-filter-name">Initiative (INI)</span>
+                            <span class="stat-filter-value" id="speMinLabel">0 - 255</span>
+                        </div>
+                        <input type="range" class="stat-slider stat-spe" id="speMin" min="0" max="255" value="0" data-stat="spe">
+                    </div>
+                    <div class="stat-filter-item" style="grid-column: 1 / -1;">
+                        <div class="stat-filter-header">
+                            <span class="stat-filter-name">Gesamtwert (BST)</span>
+                            <span class="stat-filter-value" id="bstMinLabel">0 - 800</span>
+                        </div>
+                        <input type="range" class="stat-slider stat-bst" id="bstMin" min="0" max="800" value="0" data-stat="bst">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="filter-section sort-section">
+            <div class="filter-section-title" data-toggle="sortSection">
+                <span class="toggle-icon">▼</span> Sortierung
+            </div>
+            <div class="filter-section-content" id="sortSection">
+                <div class="sort-options">
+                    <button class="sort-btn active" data-sort="id">Nr.</button>
+                    <button class="sort-btn" data-sort="name">Name</button>
+                    <button class="sort-btn" data-sort="hp">KP</button>
+                    <button class="sort-btn" data-sort="atk">ANG</button>
+                    <button class="sort-btn" data-sort="def">VER</button>
+                    <button class="sort-btn" data-sort="spa">SPA</button>
+                    <button class="sort-btn" data-sort="spd">SPV</button>
+                    <button class="sort-btn" data-sort="spe">INI</button>
+                    <button class="sort-btn" data-sort="bst">Gesamt</button>
+                    <button class="sort-direction" id="sortDirBtn" data-dir="asc">↑ Aufsteigend</button>
+                </div>
+            </div>
+        </div>
+
         <div class="drawer-actions">
             <button class="btn btn-secondary" id="resetBtn">Zurücksetzen</button>
             <button class="btn btn-primary" id="applyBtn">Anwenden</button>
-        </div>
-    </div>
-
-    <div class="music-player" id="musicPlayer">
-        <button class="minimize-btn" id="minimizeBtn">−</button>
-        <div class="pokeball-btn" id="pokeballBtn" title="Play/Pause"></div>
-        <div class="player-info">
-            <span class="player-title">Pokémon Musik</span>
-            <span class="player-status" id="playerStatus">Bereit</span>
-        </div>
-        <div class="player-controls">
-            <button class="control-btn" id="playBtn">▶</button>
-            <input type="range" class="volume-slider" id="volumeSlider" min="0" max="100" value="30">
         </div>
     </div>
 
@@ -806,6 +908,9 @@
         let selectedTypes = new Set();
         let selectedGen = 'all';
         let searchDebounceTimer = null;
+        let selectedSort = 'id';
+        let sortDirection = 'asc';
+        let statFilters = { hp: 0, atk: 0, def: 0, spa: 0, spd: 0, spe: 0, bst: 0 };
 
         // German names (Gen 1-9)
         const germanNames = {
@@ -847,7 +952,6 @@
             await loadPokemon();
             setupEventListeners();
             renderTypeFilters();
-            initMusicPlayer();
         }
 
         async function loadPokemon() {
@@ -900,15 +1004,13 @@
 
         function renderPokemon() {
             const grid = document.getElementById('pokemonGrid');
-            
+            document.getElementById('shownCount').textContent = filteredPokemon.length;
+
             if (filteredPokemon.length === 0) {
                 grid.innerHTML = '<div class="loading">Keine Pokémon gefunden.</div>';
                 return;
             }
-            
-            // Sortiere nach ID
-            filteredPokemon.sort((a, b) => a.id - b.id);
-            
+
             grid.innerHTML = filteredPokemon.map(pokemon => createPokemonCard(pokemon)).join('');
         }
 
@@ -1010,7 +1112,18 @@
             document.getElementById('fabBtn').addEventListener('click', openDrawer);
             document.getElementById('drawerOverlay').addEventListener('click', closeDrawer);
             document.getElementById('drawerClose').addEventListener('click', closeDrawer);
-            
+
+            // Collapsible sections
+            document.querySelectorAll('.filter-section-title').forEach(title => {
+                title.addEventListener('click', () => {
+                    const targetId = title.dataset.toggle;
+                    const content = document.getElementById(targetId);
+                    const icon = title.querySelector('.toggle-icon');
+                    content.classList.toggle('collapsed');
+                    icon.classList.toggle('collapsed');
+                });
+            });
+
             // Generation filters
             document.getElementById('genFilters').addEventListener('click', (e) => {
                 if (e.target.classList.contains('gen-filter')) {
@@ -1019,7 +1132,7 @@
                     selectedGen = e.target.dataset.gen;
                 }
             });
-            
+
             // Type filters
             document.getElementById('typeFilters').addEventListener('click', (e) => {
                 if (e.target.classList.contains('type-filter')) {
@@ -1033,24 +1146,72 @@
                     }
                 }
             });
-            
+
+            // Stat filter sliders
+            document.querySelectorAll('.stat-slider').forEach(slider => {
+                slider.addEventListener('input', (e) => {
+                    const stat = e.target.dataset.stat;
+                    const val = parseInt(e.target.value);
+                    statFilters[stat] = val;
+                    const max = stat === 'bst' ? 800 : 255;
+                    const label = document.getElementById(stat + 'MinLabel');
+                    if (label) {
+                        label.textContent = val > 0 ? `≥ ${val}` : `0 - ${max}`;
+                    }
+                });
+            });
+
+            // Sort options
+            document.querySelector('.sort-options').addEventListener('click', (e) => {
+                if (e.target.classList.contains('sort-btn')) {
+                    document.querySelectorAll('.sort-btn').forEach(btn => btn.classList.remove('active'));
+                    e.target.classList.add('active');
+                    selectedSort = e.target.dataset.sort;
+                }
+            });
+
+            // Sort direction toggle
+            document.getElementById('sortDirBtn').addEventListener('click', (e) => {
+                sortDirection = sortDirection === 'asc' ? 'desc' : 'asc';
+                e.target.dataset.dir = sortDirection;
+                e.target.textContent = sortDirection === 'asc' ? '↑ Aufsteigend' : '↓ Absteigend';
+            });
+
             document.getElementById('searchBox').addEventListener('input', (e) => {
                 clearTimeout(searchDebounceTimer);
                 searchDebounceTimer = setTimeout(() => applyFilters(), 200);
             });
-            
+
             document.getElementById('applyBtn').addEventListener('click', () => {
                 applyFilters();
                 closeDrawer();
             });
-            
+
             document.getElementById('resetBtn').addEventListener('click', () => {
                 document.getElementById('searchBox').value = '';
                 selectedTypes.clear();
                 selectedGen = 'all';
+                selectedSort = 'id';
+                sortDirection = 'asc';
+                statFilters = { hp: 0, atk: 0, def: 0, spa: 0, spd: 0, spe: 0, bst: 0 };
+
                 document.querySelectorAll('.type-filter').forEach(btn => btn.classList.remove('active'));
                 document.querySelectorAll('.gen-filter').forEach(btn => btn.classList.remove('active'));
                 document.querySelector('.gen-filter[data-gen="all"]').classList.add('active');
+                document.querySelectorAll('.sort-btn').forEach(btn => btn.classList.remove('active'));
+                document.querySelector('.sort-btn[data-sort="id"]').classList.add('active');
+                document.getElementById('sortDirBtn').textContent = '↑ Aufsteigend';
+                document.getElementById('sortDirBtn').dataset.dir = 'asc';
+
+                // Reset all stat sliders
+                document.querySelectorAll('.stat-slider').forEach(slider => {
+                    slider.value = 0;
+                    const stat = slider.dataset.stat;
+                    const max = stat === 'bst' ? 800 : 255;
+                    const label = document.getElementById(stat + 'MinLabel');
+                    if (label) label.textContent = `0 - ${max}`;
+                });
+
                 applyFilters();
             });
 
@@ -1073,56 +1234,6 @@
             cry.play().catch(e => console.log('Cry blocked:', e));
         }
 
-        // Musik Player
-        let bgMusic = null;
-        let isPlaying = false;
-        let currentVolume = 0.3;
-
-        function initMusicPlayer() {
-            bgMusic = new Audio('https://github.com/BEKO2210/pokedex-pro/raw/main/audio/Song.mp3');
-            bgMusic.loop = true;
-            bgMusic.volume = currentVolume;
-
-            const player = document.getElementById('musicPlayer');
-            const playBtn = document.getElementById('playBtn');
-            const minimizeBtn = document.getElementById('minimizeBtn');
-            const pokeballBtn = document.getElementById('pokeballBtn');
-            const volumeSlider = document.getElementById('volumeSlider');
-
-            playBtn.addEventListener('click', toggleMusic);
-            pokeballBtn.addEventListener('click', toggleMusic);
-            
-            minimizeBtn.addEventListener('click', () => {
-                player.classList.toggle('minimized');
-                minimizeBtn.textContent = player.classList.contains('minimized') ? '+' : '−';
-            });
-
-            volumeSlider.addEventListener('input', (e) => {
-                currentVolume = e.target.value / 100;
-                bgMusic.volume = currentVolume;
-            });
-        }
-
-        function toggleMusic() {
-            const playBtn = document.getElementById('playBtn');
-            const pokeballBtn = document.getElementById('pokeballBtn');
-            const statusText = document.getElementById('playerStatus');
-
-            if (isPlaying) {
-                bgMusic.pause();
-                isPlaying = false;
-                playBtn.textContent = '▶';
-                pokeballBtn.classList.remove('playing');
-                statusText.textContent = 'Pausiert';
-            } else {
-                bgMusic.play().catch(e => console.log('Audio blocked:', e));
-                isPlaying = true;
-                playBtn.textContent = '⏸';
-                pokeballBtn.classList.add('playing');
-                statusText.textContent = 'Spielt...';
-            }
-        }
-
         function openDrawer() {
             document.getElementById('drawerOverlay').classList.add('active');
             document.getElementById('drawer').classList.add('active');
@@ -1133,45 +1244,85 @@
             document.getElementById('drawer').classList.remove('active');
         }
 
+        function getStatValue(pokemon, stat) {
+            const statMap = { hp: 0, atk: 1, def: 2, spa: 3, spd: 4, spe: 5 };
+            if (stat === 'bst') {
+                return pokemon.stats.reduce((sum, s) => sum + s.base_stat, 0);
+            }
+            return pokemon.stats[statMap[stat]].base_stat;
+        }
+
         function applyFilters() {
             const searchTerm = document.getElementById('searchBox').value.toLowerCase();
-            
+
             filteredPokemon = allPokemon.filter(pokemon => {
                 const matchesSearch = pokemon.name.toLowerCase().includes(searchTerm) ||
                                     (pokemon.germanName && pokemon.germanName.toLowerCase().includes(searchTerm)) ||
                                     String(pokemon.id).includes(searchTerm);
-                
+
                 const matchesType = selectedTypes.size === 0 ||
                                    pokemon.types.some(t => selectedTypes.has(t.type.name));
-                
-                const matchesGen = selectedGen === 'all' || 
-                                   (genRanges[selectedGen] && 
-                                    pokemon.id >= genRanges[selectedGen][0] && 
+
+                const matchesGen = selectedGen === 'all' ||
+                                   (genRanges[selectedGen] &&
+                                    pokemon.id >= genRanges[selectedGen][0] &&
                                     pokemon.id <= genRanges[selectedGen][1]);
-                
-                return matchesSearch && matchesType && matchesGen;
+
+                // Stat filters
+                const matchesStats = Object.entries(statFilters).every(([stat, minVal]) => {
+                    if (minVal === 0) return true;
+                    return getStatValue(pokemon, stat) >= minVal;
+                });
+
+                return matchesSearch && matchesType && matchesGen && matchesStats;
             });
-            
+
+            // Sorting
+            filteredPokemon.sort((a, b) => {
+                let valA, valB;
+                if (selectedSort === 'id') {
+                    valA = a.id; valB = b.id;
+                } else if (selectedSort === 'name') {
+                    valA = (a.germanName || a.name).toLowerCase();
+                    valB = (b.germanName || b.name).toLowerCase();
+                    return sortDirection === 'asc' ? valA.localeCompare(valB) : valB.localeCompare(valA);
+                } else {
+                    valA = getStatValue(a, selectedSort);
+                    valB = getStatValue(b, selectedSort);
+                }
+                return sortDirection === 'asc' ? valA - valB : valB - valA;
+            });
+
             document.getElementById('genFilter').textContent = selectedGen === 'all' ? 'Alle' : `Gen ${selectedGen}`;
+            updateFilterBadge();
             renderPokemon();
+        }
+
+        function updateFilterBadge() {
+            const fab = document.getElementById('fabBtn');
+            let existing = fab.querySelector('.filter-count');
+            let activeCount = 0;
+            if (selectedTypes.size > 0) activeCount++;
+            if (selectedGen !== 'all') activeCount++;
+            if (Object.values(statFilters).some(v => v > 0)) activeCount++;
+            if (selectedSort !== 'id') activeCount++;
+            if (document.getElementById('searchBox').value) activeCount++;
+
+            if (activeCount > 0) {
+                if (!existing) {
+                    existing = document.createElement('span');
+                    existing.className = 'filter-count';
+                    fab.appendChild(existing);
+                }
+                existing.textContent = activeCount;
+            } else if (existing) {
+                existing.remove();
+            }
         }
 
         init();
     </script>
 
-    <!-- Musik Player -->
-    <div class="music-player" id="musicPlayer">
-        <button class="minimize-btn" id="minimizeBtn">−</button>
-        <div class="pokeball-btn" id="pokeballBtn" title="Play/Pause"></div>
-        <div class="player-info">
-            <span class="player-title">Pokémon Musik</span>
-            <span class="player-status" id="playerStatus">Bereit</span>
-        </div>
-        <div class="player-controls">
-            <button class="control-btn" id="playBtn">▶</button>
-            <input type="range" class="volume-slider" id="volumeSlider" min="0" max="100" value="30">
-        </div>
-    </div>
 </body>
 </html> 
  
